@@ -380,6 +380,13 @@ Tab:AddButton({
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
   	end    
 })
+Tab:AddToggle({
+	Name = "Silent",
+	Default = false,
+	Callback = function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/Silent%20aim"))()
+	end    
+})
 Tab:AddButton({
 	Name = "Instant Proximty Prompts",
 	Callback = function()
