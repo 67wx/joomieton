@@ -1,0 +1,416 @@
+local SilentAimFunctions = {
+		FindPartOnRayWithIgnoreList = function(Args)
+			local targetPart = ((math.floor(Random.new().NextNumber(Random.new(), 0, 1) * 100)) <= SilentAimHeadshotChance.Value or SilentAimAutoFire.Enabled) and "Head" or "RootPart"
+			local origin = Args[1].Origin
+			local plr
+			if SilentAimMode.Value == "Mouse" then
+				plr = EntityNearMouse(SilentAimFOV.Value, {
+					WallCheck = SilentAimWallCheck.Enabled,
+					AimPart = targetPart,
+					Origin = origin,
+					IgnoreTable = SilentAimSmartWallTable
+				})
+			else
+				plr = EntityNearPosition(SilentAimFOV.Value, {
+					WallCheck = SilentAimWallCheck.Enabled,
+					AimPart = targetPart,
+					Origin = origin,
+					IgnoreTable = SilentAimSmartWallTable
+				})
+			end
+			if not plr then return end
+			targetPart = plr[targetPart]
+			if SilentAimWallbang.Enabled then
+				return {targetPart, targetPart.Position, Vector3.zero, targetPart.Material}
+			end
+			SilentAimShot = plr
+			SlientAimShotTick = tick() + 1
+			local direction = CFrame.lookAt(origin, targetPart.Position)
+			if SilentAimProjectile.Enabled then 
+				local targetPosition, targetVelocity = targetPart.Position, targetPart.Velocity
+				if SilentAimProjectilePredict.Enabled then 
+					targetPosition, targetVelocity = predictGravity(targetPosition, targetVelocity, (targetPosition - origin).Magnitude / SilentAimProjectileSpeed.Value, plr, workspace.Gravity)
+				end
+				local calculated = LaunchDirection(origin, FindLeadShot(targetPosition, targetVelocity, SilentAimProjectileSpeed.Value, origin, Vector3.zero, SilentAimProjectileGravity.Value), SilentAimProjectileSpeed.Value,  SilentAimProjectileGravity.Value, false)
+				if calculated then 
+					direction = CFrame.lookAt(origin, origin + calculated)
+				end
+			end
+			Args[1] = Ray.new(origin, direction.lookVector * Args[1].Direction.Magnitude)
+			return
+		end,
+		Raycast = function(Args)
+			local targetPart = ((math.floor(Random.new().NextNumber(Random.new(), 0, 1) * 100)) <= SilentAimHeadshotChance.Value or SilentAimAutoFire.Enabled) and "Head" or "RootPart"
+			local origin = Args[1]
+			local plr
+			if SilentAimMode.Value == "Mouse" then
+				plr = EntityNearMouse(SilentAimFOV.Value, {
+					WallCheck = SilentAimWallCheck.Enabled,
+					AimPart = targetPart,
+					Origin = origin,
+					IgnoreObject = Args[3]
+				})
+			else
+				plr = EntityNearPosition(SilentAimFOV.Value, {
+					WallCheck = SilentAimWallCheck.Enabled,
+					AimPart = targetPart,
+					Origin = origin,
+					IgnoreObject = Args[3]
+				})
+			end
+			if not plr then return end
+			targetPart = plr[targetPart]
+			SilentAimShot = plr
+			SlientAimShotTick = tick() + 1
+			local direction = CFrame.lookAt(origin, targetPart.Position)
+			if SilentAimProjectile.Enabled then 
+				local targetPosition, targetVelocity = targetPart.Position, targetPart.Velocity
+				if SilentAimProjectilePredict.Enabled then 
+					targetPosition, targetVelocity = predictGravity(targetPosition, targetVelocity, (targetPosition - origin).Magnitude / SilentAimProjectileSpeed.Value, plr, workspace.Gravity)
+				end
+				local calculated = LaunchDirection(origin, FindLeadShot(targetPosition, targetVelocity, SilentAimProjectileSpeed.Value, origin, Vector3.zero, SilentAimProjectileGravity.Value), SilentAimProjectileSpeed.Value,  SilentAimProjectileGravity.Value, false)
+				if calculated then 
+					direction = CFrame.lookAt(origin, origin + calculated)
+				end
+			end
+			Args[2] = direction.lookVector * Args[2].Magnitude
+			if SilentAimWallbang.Enabled then
+				SilentAimRaycastWhitelist.FilterDescendantsInstances = {targetPart}
+				Args[3] = SilentAimRaycastWhitelist
+			end
+			return
+		end,
+		ScreenPointToRay = function(Args)
+			local targetPart = ((math.floor(Random.new().NextNumber(Random.new(), 0, 1) * 100)) <= SilentAimHeadshotChance.Value or SilentAimAutoFire.Enabled) and "Head" or "RootPart"
+			local origin = gameCamera.CFrame.p
+			local plr
+			if SilentAimMode.Value == "Mouse" then
+				plr = EntityNearMouse(SilentAimFOV.Value, {
+					WallCheck = SilentAimWallCheck.Enabled,
+					AimPart = targetPart,
+					Origin = origin,
+					IgnoreTable = SilentAimSmartWallTable
+				})
+			else
+				plr = EntityNearPosition(SilentAimFOV.Value, {
+					WallCheck = SilentAimWallCheck.Enabled,
+					AimPart = targetPart,
+					Origin = origin,
+					IgnoreTable = SilentAimSmartWallTable
+				})
+			end
+			if not plr then return end
+			targetPart = plr[targetPart]
+			SilentAimShot = plr
+			SlientAimShotTick = tick() + 1
+			local direction = CFrame.lookAt(origin, targetPart.Position)
+			if SilentAimProjectile.Enabled then 
+				if SilentAimProjectile.Enabled then 
+					local targetPosition, targetVelocity = targetPart.Position, targetPart.Velocity
+					if SilentAimProjectilePredict.Enabled then 
+						targetPosition, targetVelocity = predictGravity(targetPosition, targetVelocity, (targetPosition - origin).Magnitude / SilentAimProjectileSpeed.Value, plr, workspace.Gravity)
+					end
+					local calculated = LaunchDirection(origin, FindLeadShot(targetPosition, targetVelocity, SilentAimProjectileSpeed.Value, origin, Vector3.zero, SilentAimProjectileGravity.Value), SilentAimProjectileSpeed.Value,  SilentAimProjectileGravity.Value, false)
+					if calculated then 
+						direction = CFrame.lookAt(origin, origin + calculated)
+					end
+				end
+			end
+			return {Ray.new(direction.p + (Args[3] and direction.lookVector * Args[3] or Vector3.zero), direction.lookVector)}
+		end
+	}
+	SilentAimFunctions.FindPartOnRayWithWhitelist = SilentAimFunctions.FindPartOnRayWithIgnoreList
+	SilentAimFunctions.FindPartOnRay = SilentAimFunctions.FindPartOnRayWithIgnoreList
+	SilentAimFunctions.ViewportPointToRay = SilentAimFunctions.ScreenPointToRay
+
+	local SilentAimEnableFunctions = {
+		Normal = function()
+			if not SilentAimHooked then
+				SilentAimHooked = true
+				local oldnamecall
+				oldnamecall = hookmetamethod(game, "__namecall", function(self, ...)
+					if getnamecallmethod() ~= SilentAimMethod.Value then
+						return oldnamecall(self, ...)
+					end 
+					if checkcaller() then
+						return oldnamecall(self, ...)
+					end
+					if not SilentAim.Enabled then
+						return oldnamecall(self, ...)
+					end
+					local calling = getcallingscript() 
+					if calling then
+						local list = #SilentAimIgnoredScripts.ObjectList > 0 and SilentAimIgnoredScripts.ObjectList or {"ControlScript", "ControlModule"}
+						if table.find(list, tostring(calling)) then
+							return oldnamecall(self, ...)
+						end
+					end
+					local Args = {...}
+					local res = SilentAimFunctions[SilentAimMethod.Value](Args)
+					if res then 
+						return unpack(res)
+					end
+					return oldnamecall(self, unpack(Args))
+				end)
+			end
+		end,
+		NormalV3 = function()
+			if not SilentAimHooked then
+				SilentAimHooked = true
+				local oldnamecall
+				oldnamecall = hookmetamethod(game, "__namecall", getfilter(SilentAimFilterObject, function(self, ...) return oldnamecall(self, ...) end, function(self, ...)
+					local calling = getcallingscript() 
+					if calling then
+						local list = #SilentAimIgnoredScripts.ObjectList > 0 and SilentAimIgnoredScripts.ObjectList or {"ControlScript", "ControlModule"}
+						if table.find(list, tostring(calling)) then
+							return oldnamecall(self, ...)
+						end
+					end
+					local Args = {...}
+					local res = SilentAimFunctions[SilentAimMethod.Value](Args)
+					if res then 
+						return unpack(res)
+					end
+					return oldnamecall(self, unpack(Args))
+				end))
+			end
+		end
+	}
+
+	SilentAim = GuiLibrary.ObjectsThatCanBeSaved.CombatWindow.Api.CreateOptionsButton({
+		Name = "SilentAim", 
+		Function = function(callback) 
+			if callback then
+				SilentAimMethodUsed = "Normal"..synapsev3
+				task.spawn(function()
+					repeat
+						vapeTargetInfo.Targets.SilentAim = SlientAimShotTick >= tick() and SilentAimShot or nil
+						task.wait()
+					until not SilentAim.Enabled
+				end)
+				if SilentAimCircle then SilentAimCircle.Visible = SilentAimMode.Value == "Mouse" end
+				if SilentAimEnableFunctions[SilentAimMethodUsed] then 
+					SilentAimEnableFunctions[SilentAimMethodUsed]()
+				end
+			else
+				if restorefunction then 
+					restorefunction(getrawmetatable(game).__namecall)
+					SilentAimHooked = false
+				end
+				if SilentAimCircle then SilentAimCircle.Visible = false end
+				vapeTargetInfo.Targets.SilentAim = nil
+			end
+		end,
+		ExtraText = function() 
+			return SilentAimMethod.Value:gsub("FindPartOn", ""):gsub("PointToRay", "") 
+		end
+	})
+	SilentAimMode = SilentAim.CreateDropdown({
+		Name = "Mode",
+		List = {"Mouse", "Position"},
+		Function = function(val) if SilentAimCircle then SilentAimCircle.Visible = SilentAim.Enabled and val == "Mouse" end end
+	})
+	SilentAimMethod = SilentAim.CreateDropdown({
+		Name = "Method", 
+		List = {"FindPartOnRayWithIgnoreList", "FindPartOnRayWithWhitelist", "Raycast", "FindPartOnRay", "ScreenPointToRay", "ViewportPointToRay"},
+		Function = function(val)
+			SilentAimRaycastMode.Object.Visible = val == "Raycast"
+			if SilentAimFilterObject then SilentAimFilterObject.Filters[1].NamecallMethod = val end
+		end
+	})
+	SilentAimRaycastMode = SilentAim.CreateDropdown({
+		Name = "Method Type",
+		List = {"All", "Whitelist", "Blacklist"},
+		Function = function(val) end
+	})
+	SilentAimRaycastMode.Object.Visible = false
+	SilentAimFOV = SilentAim.CreateSlider({
+		Name = "FOV", 
+		Min = 1, 
+		Max = 1000, 
+		Function = function(val) if SilentAimCircle then SilentAimCircle.Radius = val end  end,
+		Default = 80
+	})
+	SilentAimHitChance = SilentAim.CreateSlider({
+		Name = "Hit Chance", 
+		Min = 1, 
+		Max = 100, 
+		Function = function(val) end,
+		Default = 100,
+	})
+	SilentAimHeadshotChance = SilentAim.CreateSlider({
+		Name = "Headshot Chance", 
+		Min = 1,
+		Max = 100, 
+		Function = function(val) end,
+		Default = 25
+	})
+	SilentAimCircleToggle = SilentAim.CreateToggle({
+		Name = "FOV Circle",
+		Function = function(callback) 
+			if SilentAimCircleColor.Object then SilentAimCircleColor.Object.Visible = callback end
+			if SilentAimCircleFilled.Object then SilentAimCircleFilled.Object.Visible = callback end
+			if callback then
+				SilentAimCircle = Drawing.new("Circle")
+				SilentAimCircle.Transparency = 0.5
+				SilentAimCircle.NumSides = 100
+				SilentAimCircle.Filled = SilentAimCircleFilled.Enabled
+				SilentAimCircle.Thickness = 1
+				SilentAimCircle.Visible =  SilentAim.Enabled and SilentAimMode.Value == "Mouse"
+				SilentAimCircle.Color = Color3.fromHSV(SilentAimCircleColor.Hue, SilentAimCircleColor.Sat, SilentAimCircleColor.Value)
+				SilentAimCircle.Radius = SilentAimFOV.Value
+				SilentAimCircle.Position = Vector2.new(gameCamera.ViewportSize.X / 2, gameCamera.ViewportSize.Y / 2)
+				table.insert(SilentAimCircleToggle.Connections, gameCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+					SilentAimCircle.Position = Vector2.new(gameCamera.ViewportSize.X / 2, gameCamera.ViewportSize.Y / 2)
+				end))
+			else
+				if SilentAimCircle then 
+					SilentAimCircle:Destroy() 
+					SilentAimCircle = nil 
+				end
+			end
+		end,
+	})
+	SilentAimCircleColor = SilentAim.CreateColorSlider({
+		Name = "Circle Color",
+		Function = function(hue, sat, val)
+			if SilentAimCircle then SilentAimCircle.Color = Color3.fromHSV(hue, sat, val) end
+		end
+	})
+	SilentAimCircleColor.Object.Visible = false
+	SilentAimCircleFilled = SilentAim.CreateToggle({
+		Name = "Filled Circle",
+		Function = function(callback)
+			if SilentAimCircle then SilentAimCircle.Filled = callback end
+		end,
+		Default = true
+	})
+	SilentAimCircleFilled.Object.Visible = false
+	SilentAimWallCheck = SilentAim.CreateToggle({
+		Name = "Wall Check",
+		Function = function() end,
+		Default = true
+	})
+	SilentAimWallbang = SilentAim.CreateToggle({
+		Name = "Wall Bang",
+		Function = function() end
+	})
+	SilentAimAutoFire = SilentAim.CreateToggle({
+		Name = "AutoFire",
+		Function = function(callback)
+			if callback then
+				task.spawn(function()
+					repeat
+						if SilentAim.Enabled then
+							local plr
+							if SilentAimMode.Value == "Mouse" then
+								plr = EntityNearMouse(SilentAimFOV.Value, {
+									WallCheck = SilentAimWallCheck.Enabled,
+									AimPart = "Head",
+									Origin = gameCamera.CFrame.p,
+									IgnoreTable = SilentAimSmartWallTable
+								})
+							else
+								plr = EntityNearPosition(SilentAimFOV.Value, {
+									WallCheck = SilentAimWallCheck.Enabled,
+									AimPart = "Head",
+									Origin = gameCamera.CFrame.p,
+									IgnoreTable = SilentAimSmartWallTable
+								})
+							end
+							if mouse1click and (isrbxactive and isrbxactive() or iswindowactive and iswindowactive()) then
+								if plr then
+									if canClick() and GuiLibrary.MainGui.ScaledGui.ClickGui.Visible == false and not inputService:GetFocusedTextBox() then
+										if mouseClicked then mouse1release() else mouse1press() end
+										mouseClicked = not mouseClicked
+									else
+										if mouseClicked then mouse1release() end
+										mouseClicked = false
+									end
+								else
+									if mouseClicked then mouse1release() end
+									mouseClicked = false
+								end
+							end
+						end
+						task.wait()
+					until not SilentAimAutoFire.Enabled
+				end)
+			end
+		end,
+		HoverText = "Automatically fires gun",
+	})
+	SilentAimProjectile = SilentAim.CreateToggle({
+		Name = "Projectile",
+		Function = function(callback)
+			if SilentAimProjectileSpeed.Object then SilentAimProjectileSpeed.Object.Visible = callback end
+			if SilentAimProjectileGravity.Object then SilentAimProjectileGravity.Object.Visible = callback end
+		end
+	})
+	SilentAimProjectileSpeed = SilentAim.CreateSlider({
+		Name = "Projectile Speed",
+		Min = 1,
+		Max = 1000,
+		Default = 1000,
+		Function = function() end
+	})
+	SilentAimProjectileSpeed.Object.Visible = false
+	SilentAimProjectileGravity = SilentAim.CreateSlider({
+		Name = "Projectile Gravity",
+		Min = 1,
+		Max = 192.6,
+		Default = 192.6,
+		Function = function() end
+	})
+	SilentAimProjectileGravity.Object.Visible = false
+	SilentAimProjectilePredict = SilentAim.CreateToggle({
+		Name = "Projectile Prediction",
+		Function = function() end,
+		HoverText = "Predicts the player's movement"
+	})
+	SilentAimProjectilePredict.Object.Visible = false
+	SilentAimSmartWallIgnore = SilentAim.CreateToggle({
+		Name = "Smart Ignore",
+		Function = function(callback)
+			if callback then
+				table.insert(SilentAimSmartWallIgnore.Connections, workspace.DescendantAdded:Connect(function(v)
+					local lowername = v.Name:lower()
+					if lowername:find("junk") or lowername:find("trash") or lowername:find("ignore") or lowername:find("particle") or lowername:find("spawn") or lowername:find("bullet") or lowername:find("debris") then
+						table.insert(SilentAimSmartWallTable, v)
+					end
+				end))
+				for i,v in pairs(workspace:GetDescendants()) do
+					local lowername = v.Name:lower()
+					if lowername:find("junk") or lowername:find("trash") or lowername:find("ignore") or lowername:find("particle") or lowername:find("spawn") or lowername:find("bullet") or lowername:find("debris") then
+						table.insert(SilentAimSmartWallTable, v)
+					end
+				end
+			else
+				table.clear(SilentAimSmartWallTable)
+			end
+		end,
+		HoverText = "Ignores certain folders and what not with certain names"
+	})
+	SilentAimIgnoredScripts = SilentAim.CreateTextList({
+		Name = "Ignored Scripts",
+		TempText = "ignored scripts", 
+		AddFunction = function(user) end, 
+		RemoveFunction = function(num) end
+	})
+
+	local function getTriggerBotTarget()
+		local rayparams = RaycastParams.new()
+		rayparams.FilterDescendantsInstances = {lplr.Character, gameCamera}
+		rayparams.RespectCanCollide = true
+		local ray = workspace:Raycast(gameCamera.CFrame.p, gameCamera.CFrame.lookVector * 10000, rayparams)
+		if ray and ray.Instance then
+			for i,v in pairs(entityLibrary.entityList) do 
+				if v.Targetable and v.Character then
+					if ray.Instance:IsDescendantOf(v.Character) then
+						return isVulnerable(v) and v
+					end
+				end
+			end
+		end
+		return nil
+	end
