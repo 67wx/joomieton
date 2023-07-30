@@ -1,4 +1,36 @@
+local keys = {
+    "Jamieontop3253905829035890UEWIORU9s8zdf67zw0e9wjndaw0d89awdhjaw90d78zfjmaw0e9d",
+    "Jamieontop8z89s0ajwfa90wuf890auwcnawd890awuieduaw90ufja89wud8awhjnda90wua90wud",
+    "Jamieontop0awda0wnmda90w8d789aw789gjerkogxombcvb78xcvb6cvb67c5vb78x98dx89dv67x8"
+}
 
+local counter = 1
+local keyCheck
+for i,v in pairs(keys) do
+    if counter == #keys then
+    --not whitelisted!
+    keys = ""
+    game.Players.LocalPlayer:Kick("Not a valid key!")
+    else
+        if v == _G.Key then
+            --Whitelisted!
+            print("Successfully whitelisted!")
+            keyCheck = _G.Key
+            keys = ""
+        else
+            counter = counter +1
+        end
+    end
+end
+
+while true do
+    if _G.Key == keyCheck then
+        --Not spoofed
+    else
+        game.Players.LocalPlayer:Kick("Do not try and spoof your key!")
+    end
+    wait()
+end
 loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script2"))()
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
