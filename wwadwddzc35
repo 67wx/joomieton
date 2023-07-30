@@ -1,0 +1,355 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script2"))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "South Bronx GUI : Jamiee#9000", HidePremium = false, SaveConfig = false, ConfigFolder = "Jamiee#9000"})
+for i,v in next, game.Players:GetPlayers() do
+if v.Name == "jg1120s" then
+OrionLib:MakeNotification({
+	Name = "!Owner of script is in game!",
+	Content = "Username: jg1120s",
+	Image = "rbxassetid://9736547820",
+	Time = 30
+})
+
+else
+--nil
+end
+end
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+game.Players.PlayerAdded:Connect(function(plr)
+if plr.UserId == 1330692239 then
+		OrionLib:MakeNotification({
+			Name = "!Owner of script has joined game!",
+			Content = "Username: jg1120s",
+			Image = "rbxassetid://9736547820",
+			Time = 30
+		})
+end
+end)
+OrionLib:MakeNotification({
+	Name = "Credits:",
+	Content = "Jamiee#9000",
+	Image = "rbxassetid://0",
+	Time = 10
+})
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab:AddParagraph("Made By:","Jamiee#9000")
+Tab:AddLabel("Box Auto-Farm:")
+
+Tab:AddToggle({
+	Name = "Box Auto-Farm",
+	Default = false,
+	Callback = function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/box%20farm"))()
+local plr = game.Players.LocalPlayer
+getgenv().BOXY = Value
+if BOXY == false then
+--nil
+else
+repeat
+local args = {
+    [1] = true,
+    [2] = "BOXINGGYM001"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("DialogueShop"):FireServer(unpack(args))
+task.wait(0.2)
+plr.Character.HumanoidRootPart.CFrame = workspace.PlaceHere.CFrame + Vector3.new(0,5,0)
+task.wait(0.4)
+fireproximityprompt(workspace.PlaceHere.Attachment.ProximityPrompt)
+task.wait(0.4)
+if plr.Backpack:FindFirstChild("Crate") then
+plr.Backpack.Crate.Parent = plr.Character
+else
+--repeat
+end
+ 
+OrionLib:MakeNotification({
+	Name = "Anti-Kick",
+	Content = "Please wait 15 seconds...",
+	Image = "rbxassetid://4483345998",
+	Time = 15
+})
+task.wait(15)
+plr.Character.HumanoidRootPart.CFrame = workspace.cratetruck.Model.ClickBox.CFrame
+task.wait(0.2)
+fireproximityprompt(workspace.cratetruck.Model.ClickBox.ProximityPrompt)
+task.wait(1)
+until BOXY == false
+end
+	end    
+})
+Tab:AddButton({
+	Name = "Stop Job [Collects cash]",
+	Callback = function()
+local plr = game.Players.LocalPlayer
+plr.Character.HumanoidRootPart.CFrame = workspace.NPCs["Darrian Johnson"].prox.CFrame
+task.wait(0.3)
+fireproximityprompt(workspace.NPCs["Darrian Johnson"].prox.ProximityPrompt)
+  	end    
+})
+Tab:AddLabel("Trash Auto-Farm:")
+
+Tab:AddToggle({
+	Name = "Trash Auto-Farm",
+	Default = false,
+	Callback = function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/trash%20farm"))() 
+local plr = game.Players.LocalPlayer
+getgenv().TRASHY = Value
+if TRASHY == false then
+--nil
+else
+plr.Character.HumanoidRootPart.CFrame = CFrame.new(715, 4, 158)
+end
+repeat
+if TRASHY == false then
+--nil
+else
+repeat
+local args = {
+    [1] = true,
+    [2] = "RESTAURANTWAITER"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("DialogueShop"):FireServer(unpack(args))
+task.wait(0.2)
+plr.Character:MoveTo(workspace.trashcan.prox.Position)
+task.wait(0.3)
+fireproximityprompt(workspace.trashcan.prox.Attachment.ProximityPrompt)
+until plr.Backpack:FindFirstChild("TrashBag") or plr.Character:FindFirstChild("TrashBag")
+OrionLib:MakeNotification({
+	Name = "Anti-Kick",
+	Content = "Please wait 10 seconds...",
+	Image = "rbxassetid://4483345998",
+	Time = 10
+})
+task.wait(10)
+if plr.Backpack:FindFirstChild("TrashBag") or plr.Character:FindFirstChild("TrashBag") then
+if plr.Backpack:FindFirstChild("TrashBag") then
+plr.Backpack.TrashBag.Parent = plr.Character
+else
+end
+task.wait()
+plr.Character:MoveTo(workspace.GarbageDumpster.Position)
+task.wait(0.2)
+fireproximityprompt(workspace.GarbageDumpster.Attachment.ProximityPrompt)
+else
+--nil repeat
+end
+end
+task.wait(0.5)
+until TRASHY == false
+	end    
+})
+Tab:AddButton({
+	Name = "Stop Job [Collects cash]",
+	Callback = function()
+local plr = game.Players.LocalPlayer
+plr.Character.HumanoidRootPart.CFrame = workspace.NPCs["Tony White"].prox.CFrame
+task.wait(0.3)
+fireproximityprompt(workspace.NPCs["Tony White"].prox.ProximityPrompt)
+  	end    
+})
+Tab:AddLabel("Cleaning Auto-Farm:")
+
+Tab:AddToggle({
+	Name = "Cleaning Auto-Farm",
+	Default = false,
+	Callback = function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/cleaning%20auto%20farm%20script"))() 
+local plr = game.Players.LocalPlayer
+getgenv().Autofarm = Value
+repeat
+local args = {
+    [1] = true,
+    [2] = "MANAGERSWEEP"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("DialogueShop"):FireServer(unpack(args))
+task.wait()
+if plr.Backpack:FindFirstChild("Broom") or plr.Character:FindFirstChild("Broom") then
+if plr.Backpack:FindFirstChild("Broom") then
+plr.Backpack.Broom.Parent = plr.Character
+end
+for i,v in next, workspace.Dirts:GetChildren() do
+if v.Decal.Transparency ~= 1 then
+repeat
+if plr.Backpack:FindFirstChild("Broom") then
+plr.Backpack.Broom.Parent = plr.Character
+end
+plr.Character.HumanoidRootPart.CFrame = v.CFrame + Vector3.new(0,5,0)
+task.wait()
+fireproximityprompt(v.ProximityPrompt)
+task.wait()
+until v.Decal.Transparency == 1 or Autofarm == false
+end
+end
+else
+if Autofarm == false then
+--nil
+else
+plr.Character.HumanoidRootPart.CFrame = workspace.broom.CFrame
+task.wait(0.2)
+fireproximityprompt(workspace.broom.ProximityPrompt)
+end
+end
+task.wait()
+until Autofarm == false
+	end    
+})
+Tab:AddButton({
+	Name = "Stop Job [Collects cash]",
+	Callback = function()
+local plr = game.Players.LocalPlayer
+plr.Character.HumanoidRootPart.CFrame = workspace.NPCs.manager.prox.CFrame
+task.wait(0.3)
+fireproximityprompt(workspace.NPCs.manager.prox.ProximityPrompt)
+  	end    
+})
+local Tab = Window:MakeTab({
+	Name = "Teleports",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab:AddParagraph("Made By:","Jamiee#9000")
+Tab:AddLabel("Teleports:")
+for i,v in next, workspace.Teleports:GetChildren() do
+if v:IsA("Part") then
+Tab:AddButton({
+	Name = v.Name,
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+  	end    
+})
+end
+end
+Tab:AddLabel("Turf Teleports:")
+for i,v in next, workspace.TurfTeleports:GetChildren() do
+if v:IsA("Part") then
+Tab:AddButton({
+	Name = v.Name,
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+  	end    
+})
+end
+end
+Tab:AddLabel("NPCs:")
+for i,v in next, workspace.NPCs:GetChildren() do
+Tab:AddButton({
+	Name = v.Name,
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
+  	end    
+})
+end
+Tab:AddLabel("Spawns:")
+for i,v in next, workspace.Spawns:GetChildren() do
+if v.Name == "SpawnLocation" then
+Tab:AddButton({
+	Name = v.Name,
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+  	end    
+})
+end
+end
+local Tab = Window:MakeTab({
+	Name = "Purchase Items",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab:AddParagraph("Made By:","Jamiee#9000")
+for i,v in next, workspace.gstorebuys:GetChildren() do
+Tab:AddButton({
+	Name = v.Name.." : $"..v.Price.Value,
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.proxprompt.CFrame
+task.wait(0.2)
+fireproximityprompt(v.proxprompt.ProximityPrompt)
+  	end    
+})
+end
+for i,v in next, workspace:GetChildren() do
+if v.Name == "SkiMask" then
+Tab:AddButton({
+	Name = v.Name.." : $"..v.Price.Value,
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.proxprompt.CFrame
+task.wait(0.2)
+fireproximityprompt(v.proxprompt.ProximityPrompt)
+  	end    
+})
+end
+end
+local Tab = Window:MakeTab({
+	Name = "Fun",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab:AddParagraph("Made By:","Jamiee#9000")
+Tab:AddLabel("Character:")
+Tab:AddTextbox({
+	Name = "Walkspeed : Bypassed",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+	local mt = getrawmetatable(game)
+
+setreadonly(mt, false)
+local old = mt.__index
+
+mt.__index = function(o, k)
+ if tostring(o) == "Humanoid" and tostring(k) == "WalkSpeed" then
+   print("Jamiee#9000")
+     return 16
+   end
+
+ return old(o, k)
+
+
+end
+task.wait()
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end	  
+})
+Tab:AddTextbox({
+	Name = "Stamina Value",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+	game:GetService("Players").LocalPlayer.PlayerStats.Stamina.Value = Value
+	end	  
+})
+Tab:AddToggle({
+	Name = "No Camerabob",
+	Default = false,
+	Callback = function(Value)
+game.Players.LocalPlayer.Character.CamConfig["camerabop111: O"].Disabled = Value
+	end    
+})
+Tab:AddLabel("Extra:")
+Tab:AddButton({
+	Name = "Infinite Yield Admin",
+	Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+  	end    
+})
+Tab:AddButton({
+	Name = "Instant Proximty Prompts",
+	Callback = function()
+game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+  fireproximityprompt(prompt)
+end)
+end    
+})
