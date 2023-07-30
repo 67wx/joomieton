@@ -1,6 +1,6 @@
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script?token=GHSAT0AAAAAACFWC2KP6FIW6IXOVG2LB5JSZGFZLEA"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script2?token=GHSAT0AAAAAACFWC2KOSAHC7OJJ3HZXR4MEZGFZLZQ"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script2"))()
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "South Bronx GUI : Jamiee#9000", HidePremium = false, SaveConfig = false, ConfigFolder = "Jamiee#9000"})
 for i,v in next, game.Players:GetPlayers() do
@@ -50,7 +50,7 @@ Tab:AddToggle({
 	Name = "Box Auto-Farm",
 	Default = false,
 	Callback = function(Value)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/box%20farm?token=GHSAT0AAAAAACFWC2KOLMSIDIICVGDYFAOYZGFZR3Q"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/box%20farm"))()
 local plr = game.Players.LocalPlayer
 getgenv().BOXY = Value
 if BOXY == false then
@@ -104,7 +104,7 @@ Tab:AddToggle({
 	Name = "Trash Auto-Farm",
 	Default = false,
 	Callback = function(Value)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/trash%20farm?token=GHSAT0AAAAAACFWC2KPYWWPMXMZYRHOUMMWZGFZTBQ"))() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/trash%20farm"))() 
 local plr = game.Players.LocalPlayer
 getgenv().TRASHY = Value
 if TRASHY == false then
@@ -167,7 +167,7 @@ Tab:AddToggle({
 	Name = "Cleaning Auto-Farm",
 	Default = false,
 	Callback = function(Value)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/cleaning%20auto%20farm%20script?token=GHSAT0AAAAAACFWC2KPOZERH76MRIJJ6YOSZGFZWJQ"))() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/cleaning%20auto%20farm%20script"))() 
 local plr = game.Players.LocalPlayer
 getgenv().Autofarm = Value
 repeat
