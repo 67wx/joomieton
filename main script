@@ -1,7 +1,9 @@
 local keys = {
     "Jamieontop3253905829035890UEWIORU9s8zdf67zw0e9wjndaw0d89awdhjaw90d78zfjmaw0e9d",
     "Jamieontop8z89s0ajwfa90wuf890auwcnawd890awuieduaw90ufja89wud8awhjnda90wua90wud",
-    "Jamieontop0awda0wnmda90w8d789aw789gjerkogxombcvb78xcvb6cvb67c5vb78x98dx89dv67x8"
+    "Jamieontop0awda0wnmda90w8d789aw789gjerkogxombcvb78xcvb6cvb67c5vb78x98dx89dv67x",
+    "Jamieontop0awda0wnmda90w8d789aw789g9erkogxombcvb48xcvb6cvb67c5vb78x98dx89dv67x",
+
 }
 
 local counter = 1
