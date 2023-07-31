@@ -1,38 +1,65 @@
-local keys = {
-    "Jamieontop3253905829035890UEWIORU9s8zdf67zw0e9wjndaw0d89awdhjaw90d78zfjmaw0e9d",
-    "Jamieontop8z89s0ajwfa90wuf890auwcnawd890awuieduaw90ufja89wud8awhjnda90wua90wud",
-    "Jamieontop0awda0wnmda90w8d789aw789gjerkogxombcvb78xcvb6cvb67c5vb78x98dx89dv67x",
-    "Jamieontop0awda0wnmda90w8d789aw789g9erkogxombcvb48xcvb6cvb67c5vb78x98dx89dv67x",
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Player = game.Players.LocalPlayer
+local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = true, IntroEnabled = false})
 
-}
+OrionLib:MakeNotification({
+    Name = "Logged in!",
+    Content = "You are logged in as ",
+    Image = "rbxassetid://4483345998",
+    Time = 5
+})
 
-local counter = 1
-local keyCheck
-for i,v in pairs(keys) do
-    if counter == #keys then
-    --not whitelisted!
-    keys = ""
-    game.Players.LocalPlayer:Kick("Not a valid key!")
-    else
-        if v == _G.Key then
-            --Whitelisted!
-            print("Successfully whitelisted!")
-            keyCheck = _G.Key
-            keys = ""
+_G.Key = "Jamiebetteruz890zwrawr0z9s8b9ui908szdfz0u9faws98"
+_G.KeyInput = "String"
+
+function MakeScriptHub()
+    local Window = OrionLib:MakeWindow({Name = "Script Hub", HidePremium = false, SaveConfig = true, IntroEnabled = true, IntroText = "Script Hub"})
+end
+
+function CorrectKeyNotifaction()
+    OrionLib:MakeNotification({
+        Name = "Correct Key Faggot",
+        Content = "You are logged in as "..Player.Name..".",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
+end
+
+function IncorrectKeyNotifaction()
+    OrionLib:MakeNotification({
+        Name = "WRONG KEY DUMB FUCK",
+        Content = "You are logged in as ",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
+end
+
+local Tab = Window:MakeTab({
+    Name = "Key",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+Tab:AddTextbox({
+    Name = "Enter Key",
+    Defualt = "",
+    TextDisappear = true,
+    Callback = function(Value)
+        _G.KeyInput = Value
+    end
+})
+
+Tab:AddButton({
+    Name = "Check key",
+    Callback = function()
+        if _G.KeyInput == _G.Key then
+            MakeScriptHub()
+            CorrectKeyNotifaction()
         else
-            counter = counter +1
+            IncorrectKeyNotifaction()
         end
     end
-end
-
-while true do
-    if _G.Key == keyCheck then
-        --Not spoofed
-    else
-        game.Players.LocalPlayer:Kick("FUCK YOU FOR TRYING TO GET IN MY SCRIPT PUSSY ASS MONKEY")
-    end
-    wait()
-end
+})
 loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/67wx/joomieton/main/script2"))()
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
